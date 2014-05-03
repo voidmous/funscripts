@@ -35,22 +35,22 @@ for atag in soup.select("div > section > a > img"):
     time.sleep(0.5 * random.random())
     count += 1
     pagelink = atag.parent.get("href")
-    pagename = atag.parent.parent.h1.contents   # 以h1标题作为文件名
-    print repr(pagename)
+    filename = atag.parent.parent.h1.contents[0]   # 以h1标题作为文件名
+    print filename
     rp = se.get(pagelink)
     sp = BeautifulSoup(rp.text).select("aside > div > section > a")
     # 得到包含下载链接的a标签列表
-    for s, n in zip(sp, pagename):   # 把单元素列表转为BeautifulSoup对象，ugly
-        pdflink = s.get("href")
-        print u"处理第" + repr(count).center(5) + u"条链接：" + pdflink
-        # 下载文件并写入文件夹MakeUseOf_CheatSheet
-        # 参考http://stackoverflow.com/questions/16694907/how-to-download-large-file-in-python-with-requests-py
-        # localFileName = "MakeUseOf_CheatSheet/" + pdflink.split('/')[-1]
-        localFileName = path + '/' + n + '.pdf'
-        r = se.get(pdflink, stream=True)
-        with open(localFileName, 'wb') as f:
-            for chunk in r.iter_content(chunk_size=1024):
-                if chunk:   # filter out keep-alive new trunks
-                    f.write(chunk)
-                    f.flush()
-        f.close()
+    s = sp[0]
+    pdflink = s.get("href")
+    print u"处理第" + repr(count).center(5) + u"条链接：" + pdflink
+    # 下载文件并写入文件夹MakeUseOf_CheatSheet
+    # 参考http://stackoverflow.com/questions/16694907/how-to-download-large-file-in-python-with-requests-py
+    # localFileName = "MakeUseOf_CheatSheet/" + pdflink.split('/')[-1]
+    localFileName = path + '/' + filename + '.pdf'
+    r = se.get(pdflink, stream=True)
+    with open(localFileName, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=1024):
+            if chunk:   # filter out keep-alive new trunks
+                f.write(chunk)
+                f.flush()
+    f.close()

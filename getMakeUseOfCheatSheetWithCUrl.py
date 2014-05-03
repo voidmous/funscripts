@@ -1,6 +1,10 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
+# 分析页面得到pdf下载链接并存入MakeUseOf_CheatSheet/pdflinks.txt
+# 然后可外部或内部调用curl下载
+# 不支持分析文件名
+
 import time
 import random
 import os
@@ -28,11 +32,11 @@ for atag in soup.select("section > a > img"):
     pagelink = atag.parent.get("href")
     rp = se.get(pagelink)
     sp = BeautifulSoup(rp.text).select("aside > div > section > a")
-    for s in sp:   # 把单元素列表转为BeautifulSoup对象，ugly
-        pdflink = s.get("href")
-        f = open(path + '/pdflinks.txt', 'a')
-        f.write('url = "' + pdflink + '"\n')
-        f.close()
+    s = sp[0]
+    pdflink = s.get("href")
+    f = open(path + '/pdflinks.txt', 'a')
+    f.write('url = "' + pdflink + '"\n')
+    f.close()
 
 # 调用curl下载文件
 # 貌似在python中调用curl下载比较慢，不如外部执行

@@ -1,5 +1,6 @@
 funscripts
 ==========
+
 ## getMakeUseOfCheatSheet*.py
 
 爬取静态网页[MakeUseOf Cheat Sheets](http://www.makeuseof.com/pages/downloads)
@@ -7,15 +8,13 @@ funscripts
 
 `Python`可以用两种方式进行下载：
 
-1.使用`urllib,urllib2,urllib3,requests`下载
-2.使用`os.system()`调用`shell`命令下载
+1. 使用`urllib,urllib2,urllib3,requests`下载
+2. 使用`os.system()`调用`shell`命令下载
 
 两个脚本分别作了实现。
 ## getDZoneRefCardz.py
 
-此脚本用于下载http://refcardz.dzone.com/所有的`pdf`文档，需要此网站注册账号支持。
-由于此网站注册非常严格，甚至被网友称为[Worst registration form on the internet? DZone.com](http://scott.blomqui.st/2012/07/worst-registration-form-on-the-internet-dzone-com/)，
-所以注册时我个人推荐使用信息生成器，你懂的。
+此脚本用于下载[DZone RefCardz](http://refcardz.dzone.com/)所有的`pdf`文档，需要此网站注册账号支持。由于此网站注册非常严格，甚至被网友称为[Worst registration form on the internet? DZone.com](http://scott.blomqui.st/2012/07/worst-registration-form-on-the-internet-dzone-com/)，所以注册时我个人推荐使用信息生成器，你懂的。
 
 主要实现了python模拟登陆、网页使用BeautifulSoup4解析与搜索、日记记录、文件名提取
 和下载链接数据库存取。
@@ -44,8 +43,8 @@ funscripts
 
 虽然正则表达式很强大，但是基于两点理由它并不好使：
 
-1.写出精确匹配健壮性好的表达式很难，尤其是HTML这种有大量重复标签的场合
-2.网页结构经常发生改变
+1. 写出精确匹配健壮性好的表达式很难，尤其是HTML这种有大量重复标签的场合
+2. 网页结构经常发生改变
 
 我个人更喜欢BeautifulSoup的解析，基于标签的搜索很容易分析，健壮性也很好。
 

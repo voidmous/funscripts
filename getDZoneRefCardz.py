@@ -81,7 +81,9 @@ soup = BeautifulSoup(resp.text)
 #    f.close()
 #    logging.info("写入refcardz.html")
 count = 0
-for linkblock in soup.find_all("a", class_="download-button refcardz-button"):
+x = soup.find_all("a", class_="download-button refcardz-button")
+random.shuffle(x)    # 随机打乱链接的排序
+for linkblock in x:
     time.sleep(20 * random.random())   # 随机休息20s以内
     count += 1
     # 获取文件描述作为文件名
